@@ -191,10 +191,8 @@ class SubjectController extends Controller
         return redirect()->route('result',[$id]);
     }
 
-    public function getShowResultOfSubjectForGuest($id){
-
-        $subject = Subject::findOrFail($id);
-        $answers = Answer::whereSubjectId($id)->get();
+    public function getShowResultOfSubjectForGuest($id){ 
+ 
         if($answers->count()) {
             $cnt = $answers->count();
             $cnt_right_answ = 0;
@@ -252,5 +250,12 @@ class SubjectController extends Controller
     /**
      * user messaging
      */
+
+     public function subject(){
+        $subject = Subject::find($id);
+        $question = Question::find($req->get('question_id'));
+
+        return [$subject, $question];
+     }
 }
 
